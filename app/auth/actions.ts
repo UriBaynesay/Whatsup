@@ -4,6 +4,7 @@ import { encodedRedirect } from "@/utils/utils"
 import { createClient } from "@/utils/supabase/server"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
+import { createProfile } from "@/profile/db"
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString()
@@ -15,7 +16,7 @@ export const signUpAction = async (formData: FormData) => {
     return { error: "Email and password are required" }
   }
 
-  const { error } = await supabase.auth.signUp({
+  const { data,error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -44,10 +45,12 @@ export const signInAction = async (formData: FormData) => {
     email,
     password,
   })
-
   if (error) {
     return encodedRedirect("error", "/sign-in", error.message)
   }
+
+  const {data} = await supabase.auth.getUser()
+  createProfile({email:data.user?.email,id:data.user?.id})
 
   return redirect("/")
 }
