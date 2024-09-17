@@ -1,8 +1,13 @@
 import "./globals.css"
 
-export const metadata = {
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+import { Inter } from "next/font/google"
+
+const inter = Inter({ subsets: ["latin"] })
+
+export const generateMetadata = () => {
+  return {
+    title: { template: "%s | Whats up", default: "Whats up" },
+  }
 }
 
 export default function RootLayout({
@@ -11,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="antialiased">
-      <body className="bg-background text-foreground h-dvh m-0 p-0 box-border">
+    <html lang="en" className={`${inter.className} antialiased`}>
+      <body className="bg-background text-foreground h-dvh m-0 p-0 box-border text-lg font-medium">
         {children}
       </body>
     </html>
