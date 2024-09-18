@@ -1,4 +1,4 @@
-import { getProfile } from "@/profile/db"
+import { getProfile } from "@/app/(main)/profile/db"
 
 const ProfilePage = async () => {
     const profile = await getProfile()

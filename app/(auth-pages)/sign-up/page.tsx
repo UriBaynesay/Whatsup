@@ -1,6 +1,6 @@
-import { signUpAction } from "@/app/auth/actions"
-import { FormMessage, Message } from "@/components/form-message"
-import { SubmitButton } from "@/components/submit-button"
+import { signUpAction } from "@/app/(auth-pages)/auth/actions"
+import { FormMessage, Message } from "@/components/auth/form-message"
+import { SubmitButton } from "@/components/auth/submit-button"
 import {
   Card,
   CardContent,
@@ -28,7 +28,10 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
         <CardDescription>
           {" "}
           Already have an account?{" "}
-          <Link className="text-primary font-medium underline" href="/sign-in">
+          <Link
+            className="text-foreground font-medium underline"
+            href="/sign-in"
+          >
             Sign in
           </Link>
         </CardDescription>

@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { signOutAction } from "../auth/actions"
+import { signOutAction } from "../(auth-pages)/auth/actions"
+import ChatsList from "@/components/main/chats/chat-list"
+import { redirect } from "next/navigation"
 
 export default function MainLayout({
   children,

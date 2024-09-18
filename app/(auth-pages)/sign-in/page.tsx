@@ -1,6 +1,6 @@
-import { signInAction } from "@/app/auth/actions"
-import { FormMessage, Message } from "@/components/form-message"
-import { SubmitButton } from "@/components/submit-button"
+import { signInAction } from "@/app/(auth-pages)/auth/actions"
+import { FormMessage, Message } from "@/components/auth/form-message"
+import { SubmitButton } from "@/components/auth/submit-button"
 import {
   Card,
   CardContent,
