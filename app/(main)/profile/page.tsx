@@ -4,7 +4,7 @@ const ProfilePage = async () => {
     const profile = await getProfile()
   return (
     <main>
-      <h2>Hello : {profile.name}</h2>
+      <h2>Hello : {profile?.name}</h2>
     </main>
   )
 }
