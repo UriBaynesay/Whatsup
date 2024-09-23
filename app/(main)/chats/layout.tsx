@@ -1,9 +1,9 @@
-import ChatsList from "@/components/main/chats/chat-list"
+import SideBar from "@/components/main/side-bar"
 
 const ChatPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="h-full flex">
-      <ChatsList />
+      <SideBar />
       {children}
     </main>
   )

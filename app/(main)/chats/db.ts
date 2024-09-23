@@ -10,7 +10,7 @@ export const getUserChatsPartners = async (userId?: string) => {
     .select("chat_id")
     .eq("profile_id", userId!)
   if (chatIdsError) return null
-  const chatIds = chatIdsData.map(chatId=>chatId.chat_id)
+  const chatIds = chatIdsData.map((chatId) => chatId.chat_id)
   const { data: chatData, error: chatError } = await supabase
     .from(CHAT_PROFILE)
     .select("chat_id, profile(*)")
@@ -24,9 +24,11 @@ export const createChat = async (userId: string, partnerId: string) => {
   const userChatPartners = await getUserChatsPartners(userId)
   if (userChatPartners?.some((chat) => chat.profile?.id === partnerId))
     return null
-  const { data:chat,error: chaterror } = await supabase
+  const { data: chat, error: chaterror } = await supabase
     .from(CHAT_TABLE)
-    .insert({}).select().single()
+    .insert({})
+    .select()
+    .single()
   if (chaterror) return null
   const { statusText, error: chatProfileError } = await supabase
     .from(CHAT_PROFILE)
@@ -34,6 +36,23 @@ export const createChat = async (userId: string, partnerId: string) => {
       { chat_id: chat.id, profile_id: userId },
       { chat_id: chat?.id, profile_id: partnerId },
     ])
-  if(chatProfileError) return null
+  if (chatProfileError) return null
   return chat
+}
+
+export const getChatPartners = async (chatId: string) => {
+  const supabase = createClient()
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser()
+  if (userError) return null
+
+  const { data: partners, error: partnersError } = await supabase
+    .from(CHAT_PROFILE)
+    .select("profile(*)")
+    .eq("chat_id", chatId)
+    .neq("profile_id", user?.id).single()
+  if (partnersError) return null
+  return partners
 }

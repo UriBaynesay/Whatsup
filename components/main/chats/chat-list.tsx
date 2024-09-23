@@ -3,25 +3,21 @@
 import { useEffect, useState } from "react"
 import { ScrollArea } from "../../ui/scroll-area"
 import { getUserChatsAction } from "@/app/(main)/chats/actions"
-import Link from "next/link"
 import ChatListPreview from "./chat-list-preview"
 
 export interface ChatIdAndProfile {
-        chat_id: string
-        profile: {
-          created_at: string
-          email: string | null
-          id: string
-          name: string
-          profile_image: string | null
-        } | null
+  chat_id: string
+  profile: {
+    created_at: string
+    email: string | null
+    id: string
+    name: string
+    profile_image: string | null
+  } | null
 }
 
 const ChatsList = () => {
-  const [chats, setChats] = useState<
-    | ChatIdAndProfile[]
-    | null
-  >()
+  const [chats, setChats] = useState<ChatIdAndProfile[] | null>()
 
   useEffect(() => {
     loadChats()
@@ -32,21 +28,18 @@ const ChatsList = () => {
     setChats(fetchedChats)
   }
   return (
-    <section>
-      <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+    <div className="grow">
+      <ScrollArea className="h-full w-[350px] rounded-md border p-4">
         {chats && (
           <ul>
             <h3 className="text-lg font-semibold mb-6">Chats</h3>
             {chats.map((chat) => {
-              return (
-                <ChatListPreview key={chat.chat_id} chat={chat}/>
-              )
+              return <ChatListPreview key={chat.chat_id} chat={chat} />
             })}
           </ul>
         )}
       </ScrollArea>
-      <Link href={"/chats/create"}>Create Chat</Link>
-    </section>
+    </div>
   )
 }
 
