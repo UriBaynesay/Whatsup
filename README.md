@@ -18,6 +18,7 @@ Welcome to the Whatsup project! This repository contains a social messaging appl
 
 ## Technologies Used
 
+- **Frontend:** shadcn/ui, TailwindCSS
 - **Framework:** NextJS
 - **Backend:** Supabase
 
@@ -49,7 +50,6 @@ To get started with the Whatsup application, follow these steps:
 
 5. **Run the application:**
    ```bash
-   cd server
    npm start
    ```
 
