@@ -3,6 +3,25 @@ import { createClient } from "@/utils/supabase/server"
 const CHAT_TABLE = "chat"
 const CHAT_PROFILE = "chat_profile"
 
+interface ChatDetailsForList {
+    chat_id: string
+    profile: {
+      created_at: string
+      email: string | null
+      id: string
+      name: string
+      profile_image: string | null
+    } | null
+    latestMessage:
+      | {
+          created_at: string
+          content: string
+          profile_id: string
+          chat_id: string
+        }
+      | undefined
+  }
+
 export const getUserChatsPartners = async (userId?: string) => {
   const supabase = createClient()
   const { data: chatIdsData, error: chatIdsError } = await supabase
@@ -16,7 +35,22 @@ export const getUserChatsPartners = async (userId?: string) => {
     .select("chat_id, profile(*)")
     .in("chat_id", chatIds)
   if (chatError) return null
-  return chatData.filter((chat) => chat.profile?.id !== userId)
+  const { data: latestMessages, error: latestMessagesError } = await supabase
+    .from("message")
+    .select("created_at,content,profile_id,chat_id")
+    .order("created_at", { ascending: false })
+    .in("chat_id", chatIds)
+  if (latestMessagesError) return null
+  const result = chatData.filter((chat) => chat.profile?.id !== userId) as ChatDetailsForList[]
+  result.forEach((chat) => {
+    const currChatLatestMessage = latestMessages.find(
+      (message) => message.chat_id === chat.chat_id
+    )
+    chat.latestMessage = currChatLatestMessage
+    return chat
+  })
+
+  return result
 }
 
 export const createChat = async (userId: string, partnerId: string) => {
@@ -52,7 +86,8 @@ export const getChatPartners = async (chatId: string) => {
     .from(CHAT_PROFILE)
     .select("profile(*)")
     .eq("chat_id", chatId)
-    .neq("profile_id", user?.id).single()
+    .neq("profile_id", user?.id)
+    .single()
   if (partnersError) return null
   return partners
 }

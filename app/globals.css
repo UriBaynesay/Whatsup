@@ -10,11 +10,11 @@ body{
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 240 10% 25%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 240 10% 25%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 240 10% 25%;
     --primary: 142.1 76.2% 36.3%;
     --primary-foreground: 0 0% 100%;
     --secondary: 240 4.8% 95.9%;
