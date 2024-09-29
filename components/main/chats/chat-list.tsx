@@ -14,6 +14,14 @@ export interface ChatIdAndProfile {
     name: string
     profile_image: string | null
   } | null
+  latestMessage:
+    | {
+        created_at: string
+        content: string
+        profile_id: string
+        chat_id: string
+      }
+    | undefined
 }
 
 const ChatsList = () => {

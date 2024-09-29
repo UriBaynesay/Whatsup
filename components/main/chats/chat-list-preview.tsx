@@ -14,7 +14,15 @@ const ChatListPreview = ({ chat }: { chat: ChatIdAndProfile }) => {
           width={42}
           alt="Profile Image"
         />
-        {chat.profile?.name}
+        <div>
+          <h1>{chat.profile?.name}</h1>
+          <div className="flex justify-between">
+            <p>{chat.latestMessage?.content}</p>
+            <small className="text-gray-400">
+              {new Date(chat.latestMessage?.created_at as string).toLocaleTimeString()}
+            </small>
+          </div>
+        </div>
       </Link>
       <Separator />
     </li>
