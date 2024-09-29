@@ -20,7 +20,7 @@ const MessageListPreview = ({ message }: { message: Message }) => {
   }
   return (
     <li
-      className={`flex ${userId != message.profile?.id && "flex-row-reverse"}`}
+      className={`flex ${userId != message.profile?.id && "flex-row-reverse"} mb-2`}
     >
       <Image
         src={message.profile?.profile_image as string}

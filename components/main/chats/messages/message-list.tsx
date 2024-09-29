@@ -31,7 +31,7 @@ const MessageList = ({ chatId }: { chatId: string }) => {
           table: "message",
         },
         ({ errors, new: newMessage }) => {
-          if (!errors) setMessage([...messages, newMessage as Message])
+          if (!errors) loadMessages()
         }
       )
       .subscribe()
@@ -50,9 +50,9 @@ const MessageList = ({ chatId }: { chatId: string }) => {
     }
   }
   return (
-    <div className="grow">
+    <div className="grow h-full bg-chat-background rounded-b-md shadow-md">
       {!!messages.length && (
-        <ScrollArea className="h-full bg-chat-background rounded-b-md shadow-md">
+        <ScrollArea>
           <ul className="p-2">
             {messages.map((message) => (
               <MessageListPreview key={message.created_at} message={message} />

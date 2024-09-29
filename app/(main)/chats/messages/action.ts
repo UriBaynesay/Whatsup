@@ -48,7 +48,6 @@ export const createMessageAction = async (
   } catch (error) {
     return { message: { message: "Can't send message at the moment" } }
   }
-  revalidatePath(`/chats/${chatId}`)
   return { message: {} }
 }
 
