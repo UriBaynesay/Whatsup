@@ -40,7 +40,6 @@ To get started with the Whatsup application, follow these steps:
 3. **Install dependencies:**
 
    ```bash
-   cd server
    npm install
    ```
 
