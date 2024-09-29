@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { signOutAction } from "../(auth-pages)/auth/actions"
-import ChatsList from "@/components/main/chats/chat-list"
-import { redirect } from "next/navigation"
+import Link from "next/link"
 
 export default function MainLayout({
   children,
@@ -9,9 +8,11 @@ export default function MainLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="main-layout h-full flex flex-col px-12 z-10 bg-white">
-      <header className="flex justify-between items-center pt-6 mb-6">
-        <h1 className="text-3xl font-bold">Whats up</h1>
+    <div className="h-full flex flex-col px-12 z-10 bg-white">
+      <header className="flex justify-between items-center pt-6 mb-4">
+        <Link href={"/"}>
+          <h1 className="text-2xl font-bold">Whats up</h1>
+        </Link>
         <form action={signOutAction}>
           <Button>Sign out</Button>
         </form>
