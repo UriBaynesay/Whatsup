@@ -37,7 +37,7 @@ const ChatsList = () => {
   }
   return (
     <div className="grow">
-      <ScrollArea className="h-full w-[350px] rounded-md border p-4">
+      <ScrollArea className="h-full w-[350px]  p-4">
         {chats && (
           <ul>
             <h3 className="text-lg font-semibold mb-6">Chats</h3>

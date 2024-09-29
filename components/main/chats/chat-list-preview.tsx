@@ -19,7 +19,10 @@ const ChatListPreview = ({ chat }: { chat: ChatIdAndProfile }) => {
           <div className="flex justify-between">
             <p>{chat.latestMessage?.content}</p>
             <small className="text-gray-400">
-              {new Date(chat.latestMessage?.created_at as string).toLocaleTimeString()}
+              {chat.latestMessage?.created_at &&
+                new Date(
+                  chat.latestMessage?.created_at as string
+                ).toLocaleTimeString()}
             </small>
           </div>
         </div>
