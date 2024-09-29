@@ -30,6 +30,49 @@ export const getProfile = async () => {
   return profileData
 }
 
+export const editProfile = async (
+  profile_id: string,
+  name: string,
+  profile_image?: File
+) => {
+  const supabase = createClient()
+  const { data, error } = await supabase
+    .from("profile")
+    .update({ name })
+    .eq("id", profile_id)
+  if (profile_image?.size) {
+    const { data: profileImageExits, error: profileImageExitsError } =
+      await supabase.storage
+        .from("profile_images")
+        .exists(`${profile_id}_profile_image`)
+    if (!profileImageExits) {
+      const { data, error } = await supabase.storage
+        .from("profile_images")
+        .upload(`${profile_id}_profile_image`, profile_image)
+      if (error) return null
+      const { data: imageUrl } = supabase.storage
+        .from("profile_images")
+        .getPublicUrl(data.path)
+      return await supabase
+        .from("profile")
+        .update({ profile_image: imageUrl.publicUrl })
+        .eq("id", profile_id)
+    }
+    const { data, error } = await supabase.storage
+      .from("profile_images")
+      .update(`${profile_id}_profile_image`, profile_image)
+    if (error) return null
+    const { data: imageUrl } = supabase.storage
+      .from("profile_images")
+      .getPublicUrl(data.path)
+    return await supabase
+      .from("profile")
+      .update({ profile_image: imageUrl.publicUrl })
+      .eq("id", profile_id)
+  }
+  return data
+}
+
 export const getProfileByEmail = async (email?: string) => {
   const supabase = createClient()
   const { data: profile, error } = await supabase
