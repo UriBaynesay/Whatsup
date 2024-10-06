@@ -8,14 +8,14 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { createChatAction } from "../actions"
+import { createGroupChatAction } from "../../actions"
 
-const CreateChatPage = () => {
+const CreateGroupChatPage = () => {
   return (
     <section className="grow flex justify-center items-start">
       <Card>
         <CardHeader>
-          <CardTitle>Create chat</CardTitle>
+          <CardTitle>Create group chat</CardTitle>
           <CardDescription>
             Start a new conversation with your friends
           </CardDescription>
@@ -23,9 +23,17 @@ const CreateChatPage = () => {
         <CardContent>
           <form
             className="flex flex-col min-w-64 items-center"
-            action={createChatAction}
+            action={createGroupChatAction}
           >
             <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+              <Label htmlFor="title">Title</Label>
+              <Input
+                id="title"
+                type="text"
+                name="title"
+                placeholder="Group chat title"
+                required
+              />
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" name="email" placeholder="Contacts email" required />
               <Button type="submit">Create</Button>
@@ -37,4 +45,4 @@ const CreateChatPage = () => {
   )
 }
 
-export default CreateChatPage
+export default CreateGroupChatPage

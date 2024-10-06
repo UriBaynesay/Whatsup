@@ -12,32 +12,47 @@ export type Database = {
       chat: {
         Row: {
           created_at: string
+          group_chat_image: string | null
           id: string
+          title: string | null
+          type: string
         }
         Insert: {
           created_at?: string
+          group_chat_image?: string | null
           id?: string
+          title?: string | null
+          type?: string
         }
         Update: {
           created_at?: string
+          group_chat_image?: string | null
           id?: string
+          title?: string | null
+          type?: string
         }
         Relationships: []
       }
       chat_profile: {
         Row: {
+          admin: boolean
           chat_id: string
           created_at: string
+          id: string
           profile_id: string
         }
         Insert: {
+          admin?: boolean
           chat_id?: string
           created_at?: string
+          id?: string
           profile_id?: string
         }
         Update: {
+          admin?: boolean
           chat_id?: string
           created_at?: string
+          id?: string
           profile_id?: string
         }
         Relationships: [

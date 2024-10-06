@@ -3,17 +3,20 @@ import Image from "next/image"
 import Link from "next/link"
 
 const ProfilePreview = async () => {
-  const user = await getProfile()
+  const profile = await getProfile()
   return (
     <Link className="flex mb-2" href={"/profile/edit"}>
       <Image
-        className="rounded-full"
-        src={user?.profile_image as string}
+        className="rounded-full self-center"
+        src={profile?.profile_image as string}
         width={36}
         height={36}
         alt="Profile Image"
       />
-      <h1 className="ml-2">{user?.name}</h1>
+      <div>
+        <h1 className="ml-2">{profile?.name}</h1>
+        <small className="text-gray-300">{`@${profile?.email}`}</small>
+      </div>
     </Link>
   )
 }

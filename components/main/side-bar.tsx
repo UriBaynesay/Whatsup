@@ -10,6 +10,9 @@ const SideBar = async () => {
       <Link className="mt-12 pb-4" href={"/chats/create"}>
         Create Chat
       </Link>
+      <Link className="pb-4" href={"/chats/group-chat/create"}>
+        Create Group Chat
+      </Link>
     </section>
   )
 }

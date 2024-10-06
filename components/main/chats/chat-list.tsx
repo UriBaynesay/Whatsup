@@ -4,28 +4,10 @@ import { useEffect, useState } from "react"
 import { ScrollArea } from "../../ui/scroll-area"
 import { getUserChatsAction } from "@/app/(main)/chats/actions"
 import ChatListPreview from "./chat-list-preview"
-
-export interface ChatIdAndProfile {
-  chat_id: string
-  profile: {
-    created_at: string
-    email: string | null
-    id: string
-    name: string
-    profile_image: string | null
-  } | null
-  latestMessage:
-    | {
-        created_at: string
-        content: string
-        profile_id: string
-        chat_id: string
-      }
-    | undefined
-}
+import { ChatDetailsForList } from "@/app/(main)/chats/db"
 
 const ChatsList = () => {
-  const [chats, setChats] = useState<ChatIdAndProfile[] | null>()
+  const [chats, setChats] = useState<ChatDetailsForList[] | null>()
 
   useEffect(() => {
     loadChats()
@@ -42,7 +24,7 @@ const ChatsList = () => {
           <ul>
             <h3 className="text-lg font-semibold mb-6">Chats</h3>
             {chats.map((chat) => {
-              return <ChatListPreview key={chat.chat_id} chat={chat} />
+              return <ChatListPreview key={chat?.chat?.id} chat={chat} />
             })}
           </ul>
         )}

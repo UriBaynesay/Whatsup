@@ -32,9 +32,15 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
         <form className="flex flex-col min-w-64 max-w-64 mx-auto">
           <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
             <Label htmlFor="email">Email</Label>
-            <Input name="email" placeholder="you@example.com" required />
+            <Input
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
             <Label htmlFor="password">Password</Label>
             <Input
+              id="password"
               type="password"
               name="password"
               placeholder="Your password"
