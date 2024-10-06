@@ -1,21 +1,21 @@
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 import Link from "next/link"
-import { ChatIdAndProfile } from "./chat-list"
+import { ChatDetailsForList } from "@/app/(main)/chats/db"
 
-const ChatListPreview = ({ chat }: { chat: ChatIdAndProfile }) => {
+const ChatListPreview = ({ chat }: { chat: ChatDetailsForList }) => {
   return (
     <li>
-      <Link href={`/chats/${chat.chat_id}`} className="flex items-center mb-3">
+      <Link href={`/chats/${chat.chat?.id}`} className="flex items-center my-3">
         <Image
           className="rounded-full mr-2"
-          src={chat.profile?.profile_image!}
+          src={chat.chat?.type==="group"?chat.chat.group_chat_image as string:chat.profile?.profile_image as string}
           height={42}
           width={42}
           alt="Profile Image"
         />
         <div>
-          <h1>{chat.profile?.name}</h1>
+          <h1>{chat.chat?.type==="group"?chat.chat.title:chat.profile?.name}</h1>
           <div className="flex justify-between">
             <p>{chat.latestMessage?.content}</p>
             <small className="text-gray-400">

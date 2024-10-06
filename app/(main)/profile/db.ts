@@ -2,6 +2,16 @@ import { createClient } from "@/utils/supabase/server"
 
 const TABLE = "profile"
 
+export interface Profile {
+  profile: {
+    created_at: string
+    email: string | null
+    id: string
+    name: string
+    profile_image: string | null
+  } | null
+}
+
 export const createProfile = async (user: { email?: string; id?: string }) => {
   const supabase = createClient()
   const { data: profileData } = await supabase
